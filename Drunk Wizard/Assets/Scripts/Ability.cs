@@ -13,6 +13,8 @@ public class Ability : ScriptableObject
     public string description = "A basic ability.";
     public AbilityType type = AbilityType.Attack;
 
+    public Sprite abilityIcon;
+
     [Header("Combat Stats")]
     // General numeric value used for damage, healing, or utility power
     public int power = 10; 

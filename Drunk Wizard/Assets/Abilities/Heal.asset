@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0078db149b532be4ea467465e33eae99, type: 3}
+  m_Name: Heal
+  m_EditorClassIdentifier: Assembly-CSharp::Ability
+  abilityName: Heal
+  description: Heal yourself.
+  type: 1
+  abilityIcon: {fileID: -4954436105157027259, guid: 2ba337ae4bcf7a84b8f74b1cdbb188c8, type: 3}
+  power: 10
+  executionDelay: 0.5

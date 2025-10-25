@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: 8f36a9d4faf42f8429894e547a56d819
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3070051570395497670
+    second: slots_animation_0
+  - first:
+      213: 5603767600341991342
+    second: slots_animation_1
+  - first:
+      213: 2518979693126109794
+    second: slots_animation_2
+  - first:
+      213: 61415584589997955
+    second: slots_animation_3
+  - first:
+      213: -2371206542768397083
+    second: slots_animation_4
+  - first:
+      213: 184140527647313462
+    second: slots_animation_5
+  - first:
+      213: 3936985841074805437
+    second: slots_animation_6
+  - first:
+      213: -5283998187423216979
+    second: slots_animation_7
+  - first:
+      213: -5034410425020579191
+    second: slots_animation_8
+  - first:
+      213: 1339966241741980177
+    second: slots_animation_9
+  - first:
+      213: -1891866063450474148
+    second: slots_animation_10
+  - first:
+      213: -4691904965535885083
+    second: slots_animation_11
+  - first:
+      213: 5509870002630482872
+    second: slots_animation_12
+  - first:
+      213: 6622934643272766032
+    second: slots_animation_13
+  - first:
+      213: -4372140304215398300
+    second: slots_animation_14
+  - first:
+      213: -5948060734706862012
+    second: slots_animation_15
+  - first:
+      213: 122576641163206606
+    second: slots_animation_16
+  - first:
+      213: 3895506756430363613
+    second: slots_animation_17
+  - first:
+      213: -1274129139590677331
+    second: slots_animation_18
+  - first:
+      213: 8714568084973188841
+    second: slots_animation_19
+  - first:
+      213: 3606766422212318795
+    second: slots_animation_20
+  - first:
+      213: 8334135876899313235
+    second: slots_animation_21
+  - first:
+      213: 5802426994017994576
+    second: slots_animation_22
+  - first:
+      213: 9055034047236665870
+    second: slots_animation_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: slots_animation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c4cd8f23a30b9a20800000000000000
+      internalID: 3070051570395497670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_1
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaf3a3641f494cd40800000000000000
+      internalID: 5603767600341991342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_2
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 3
+        width: 155
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26a443d4fa635f220800000000000000
+      internalID: 2518979693126109794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_3
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 3
+        width: 155
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 387e82716213ad000800000000000000
+      internalID: 61415584589997955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_4
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 3
+        width: 155
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e425396638c71fd0800000000000000
+      internalID: -2371206542768397083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_5
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63ecb2395d23e8200800000000000000
+      internalID: 184140527647313462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_6
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dba910f63cbf2a630800000000000000
+      internalID: 3936985841074805437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_7
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daac4d4f4a77ba6b0800000000000000
+      internalID: -5283998187423216979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_8
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9820023546e222ab0800000000000000
+      internalID: -5034410425020579191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_9
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 112cb0a8234889210800000000000000
+      internalID: 1339966241741980177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_10
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c59fa6db6ddbeb5e0800000000000000
+      internalID: -1891866063450474148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_11
+      rect:
+        serializedVersion: 2
+        x: 2200
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e89759ea4103eeb0800000000000000
+      internalID: -4691904965535885083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_12
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bbde59239df67c40800000000000000
+      internalID: 5509870002630482872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_13
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 052d6eed7f369eb50800000000000000
+      internalID: 6622934643272766032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_14
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 468a213de890353c0800000000000000
+      internalID: -4372140304215398300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_15
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4483955a64e347da0800000000000000
+      internalID: -5948060734706862012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_16
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecf1b424eca73b100800000000000000
+      internalID: 122576641163206606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_17
+      rect:
+        serializedVersion: 2
+        x: 3400
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddb7a2571ce9f0630800000000000000
+      internalID: 3895506756430363613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_18
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dac39b45c42615ee0800000000000000
+      internalID: -1274129139590677331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_19
+      rect:
+        serializedVersion: 2
+        x: 3800
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e678c3608d50f870800000000000000
+      internalID: 8714568084973188841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_20
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4695c793fecd0230800000000000000
+      internalID: 3606766422212318795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_21
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3561c648c6cc8a370800000000000000
+      internalID: 8334135876899313235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_22
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0578495cb9c568050800000000000000
+      internalID: 5802426994017994576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slots_animation_23
+      rect:
+        serializedVersion: 2
+        x: 4600
+        y: 4
+        width: 155
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e02fb968d71f9ad70800000000000000
+      internalID: 9055034047236665870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      slots_animation_0: 3070051570395497670
+      slots_animation_1: 5603767600341991342
+      slots_animation_10: -1891866063450474148
+      slots_animation_11: -4691904965535885083
+      slots_animation_12: 5509870002630482872
+      slots_animation_13: 6622934643272766032
+      slots_animation_14: -4372140304215398300
+      slots_animation_15: -5948060734706862012
+      slots_animation_16: 122576641163206606
+      slots_animation_17: 3895506756430363613
+      slots_animation_18: -1274129139590677331
+      slots_animation_19: 8714568084973188841
+      slots_animation_2: 2518979693126109794
+      slots_animation_20: 3606766422212318795
+      slots_animation_21: 8334135876899313235
+      slots_animation_22: 5802426994017994576
+      slots_animation_23: 9055034047236665870
+      slots_animation_3: 61415584589997955
+      slots_animation_4: -2371206542768397083
+      slots_animation_5: 184140527647313462
+      slots_animation_6: 3936985841074805437
+      slots_animation_7: -5283998187423216979
+      slots_animation_8: -5034410425020579191
+      slots_animation_9: 1339966241741980177
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

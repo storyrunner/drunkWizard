@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 // A simple component to manage health, damage, and healing.
 public class HealthComponent : MonoBehaviour
@@ -11,9 +12,19 @@ public class HealthComponent : MonoBehaviour
     public int MaxHealth => maxHealth;
     public bool IsDead => currentHealth <= 0;
 
+    public SpriteRenderer characterRenderer;
+    public Color damageColor = Color.red;
+    public float flashDuration = 0.1f;
+    private Color originalColor;
+
     void Awake()
     {
         currentHealth = maxHealth;
+
+        if (characterRenderer != null)
+        {
+            originalColor = characterRenderer.color;
+        }
     }
 
     // Reduces health, checks for death, and notifies the GameManager (if necessary).
@@ -22,12 +33,27 @@ public class HealthComponent : MonoBehaviour
         currentHealth = Mathf.Max(0, currentHealth - damageAmount);
         Debug.Log($"{gameObject.name} took {damageAmount} damage. Health remaining: {currentHealth}");
 
+        if (characterRenderer != null)
+        {
+            StartCoroutine(DamageFlash());
+        }
+
         if (IsDead)
         {
+            // NEW: Hide character on death
             Debug.Log($"{gameObject.name} has been defeated!");
-            // Notify GameManager that this entity is dead.
-            // FindFirstObjectByType<GameManager>().CheckGameOver(); 
+            if (characterRenderer != null) characterRenderer.enabled = false;
+            // Optionally: Trigger a death animation/particle effect here
         }
+        // The GameManager's ExecuteTurnSequence() checks IsDead after *every* ability execution, 
+            // so we do not need to call CheckGameOver() here.
+    }
+
+    private IEnumerator DamageFlash()
+    {
+        characterRenderer.color = damageColor;
+        yield return new WaitForSeconds(flashDuration);
+        characterRenderer.color = originalColor;
     }
 
     // Increases health, clamped by maxHealth.

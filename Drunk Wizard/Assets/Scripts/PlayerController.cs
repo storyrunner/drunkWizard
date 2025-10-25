@@ -105,4 +105,8 @@ public class PlayerController : MonoBehaviour
     {
         return abilitySlots[index];
     }
+
+    public List<Ability> GetSelectedAbilityChain(){
+        return selectedAbilityChain;
+    }
 }

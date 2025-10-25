@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
             Ability abilityToUse = abilitySlots[slotIndex];
             
             // 1. Execute the ability
-            abilityToUse.Execute(this.gameObject, targetEnemy.gameObject);
+            abilityToUse.Execute(this.gameObject, targetEnemy.gameObject, gameManager);
 
             // 2. Clear the used slot
             abilitySlots[slotIndex] = null;

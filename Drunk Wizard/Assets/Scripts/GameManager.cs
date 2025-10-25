@@ -1,6 +1,7 @@
 using UnityEngine;
-using UnityEngine.Accessibility;
+using System.Collections;
 using System.Linq;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
         EnemyAction,
         GameOver
     }
+
     private GameState currentState = GameState.AwaitStart;
 
     public AbilitySlotMachine playerRoller;
@@ -25,20 +27,42 @@ public class GameManager : MonoBehaviour
     public Ability enemyRolledAbility;
     public string combatLogMessage = "";
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+
+    void Awake()
     {
-        playerRoller = GameObject.Find("PlayerSlotMachine").GetComponent<AbilitySlotMachine>();
-        enemyRoller = GameObject.Find("EnemySlotMachine").GetComponent<AbilitySlotMachine>();
+        // 1. Find Player and Enemy characters (always safe using FindFirstObjectByType)
         player = FindFirstObjectByType<PlayerController>();
         enemy = FindFirstObjectByType<EnemyAI>();
+        
+        // 2. Find ALL slot machine components in the scene
+        // We use FindFirstObjectByType to ensure we get both machines, even if they are children of other objects.
+        AbilitySlotMachine[] rollers = FindObjectsOfType<AbilitySlotMachine>();
 
+        // 3. Assign the rollers based on naming convention
+        foreach (var roller in rollers)
+        {
+            if (roller.gameObject.name.Contains("Player"))
+            {
+                playerRoller = roller;
+            }
+            else if (roller.gameObject.name.Contains("Enemy"))
+            {
+                enemyRoller = roller;
+            }
+        }
+
+        // 4. Subscribe to the events
         if (playerRoller != null) playerRoller.OnAbilityRolled += OnPlayerAbilityRolled;
         if (enemyRoller != null) enemyRoller.OnAbilityRolled += OnEnemyAbilityRolled;
-
-        currentState = GameState.SlotPhase;
-        StartTurn();
+        
+        // Final sanity check
+        if (playerRoller == null || enemyRoller == null || player == null || enemy == null)
+        {
+            Debug.LogError("FATAL ERROR: Core game components (Player/Enemy/SlotMachines) not found. Check names and scene hierarchy.");
+        }
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -53,8 +77,12 @@ public class GameManager : MonoBehaviour
 
         if (CheckGameOver()) return;
 
-        playerRoller.RollAbility();
-        enemyRoller.RollAbility();
+        if (playerRoller != null){
+            playerRoller.RollAbility();
+        }
+        if (enemyRoller != null){
+            enemyRoller.RollAbility();
+        }
 
         currentState = GameState.PlayerSlotDecision;
     }
@@ -63,17 +91,20 @@ public class GameManager : MonoBehaviour
     {
         playerRolledAbility = rolledAbility;
         combatLogMessage = $"You rolled the ability: {rolledAbility.abilityName}. Choose a slot or discard.";
+        currentState = GameState.PlayerSlotDecision;
     }
 
     private void OnEnemyAbilityRolled(Ability rolledAbility)
     {
         enemyRolledAbility = rolledAbility;
-        enemy.HandleRolledAbility(enemyRolledAbility);
+        combatLogMessage += $"\nEnemy Rolled: {rolledAbility.abilityName}.";
     }
 
     public void EndSlotPhase()
     {
-        currentState = GameState.PlayerAbilitySelect;
+         if (currentState != GameState.PlayerSlotDecision) {
+            return;
+         }
         combatLogMessage = "Slot Phase complete. Select an ability from your 5 slots to use.";
         Debug.Log("Slot Phase complete. Moving on to Player Ability Selection Phase");
     }
@@ -83,22 +114,21 @@ public class GameManager : MonoBehaviour
         switch (currentState)
         {
             case GameState.PlayerAbilitySelect:
-                currentState = GameState.EnemyAction;
-                combatLogMessage = "Enemy is executing its action...";
-                Debug.Log("Enemy Action Phase");
-                enemy.ExecuteAction(this);
-                break;
-            case GameState.EnemyAction:
-                if (CheckGameOver())
+                 if (enemyRolledAbility != null)
                 {
-                    currentState = GameState.GameOver;
-                    combatLogMessage = "Game Over!";
-                    Debug.Log("Game Over!");
+                    combatLogMessage += $"\nEnemy uses: {enemyRolledAbility.abilityName}!";
+                    // Enemy targets the player and passes the GameManager to log/control flow
+                    enemyRolledAbility.Execute(enemy.gameObject, player.gameObject, this);
                 }
                 else
                 {
-                    StartTurn();
+                    combatLogMessage += "\nEnemy could not act (no rolled ability).";
+                    // Immediately transition to the next turn if the enemy can't act
+                    StartCoroutine(WaitAndStartTurn(1.5f)); 
                 }
+                break;
+            case GameState.EnemyAction:
+                StartCoroutine(WaitAndStartTurn(1.5f));
                 break;
             default:
                 Debug.LogWarning("Tried to advance phase from an invalid state: " + currentState);
@@ -106,21 +136,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitAndStartTurn(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        currentState = GameState.SlotPhase;
+        StartTurn();
+    }
+
     private bool CheckGameOver()
     {
-        if (player.Health.IsDead)
+        if (player != null && player.Health.CurrentHealth <= 0)
         {
-            Debug.Log("You Lost!");
-            combatLogMessage = "You lost! The game is over.";
+            currentState = GameState.GameOver;
+            combatLogMessage = "Game Over! You Lost!";
+            Debug.Log(combatLogMessage);
             return true;
         }
-        if (enemy.Health.IsDead)
+        if (enemy != null && enemy.Health.CurrentHealth <= 0)
         {
-            Debug.Log("You Won!");
-            combatLogMessage = "You won! The game is over.";
+            currentState = GameState.GameOver;
+            combatLogMessage = "Game Over! You Won!";
+            Debug.Log(combatLogMessage);
             return true;
         }
         return false;
     }
-
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Linq;
 using TMPro;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,20 +12,25 @@ public class GameManager : MonoBehaviour
         AwaitStart,
         SlotPhase,
         PlayerSlotDecision,
-        PlayerAbilitySelect,
-        EnemyAction,
+        PlayerAbilitySelect, // Player chooses ability chain
+        CombatSequence,      // Abilities are executing sequentially
         GameOver
     }
 
     private GameState currentState = GameState.AwaitStart;
+
+    public GameState CurrentState => currentState;
 
     public AbilitySlotMachine playerRoller;
     public AbilitySlotMachine enemyRoller;
     public PlayerController player; 
     public EnemyAI enemy; 
 
-    public Ability playerRolledAbility; 
-    public Ability enemyRolledAbility;
+    public List<Ability> playerRolledAbilities = new List<Ability>();
+    public List<Ability> enemyRolledAbilities = new List<Ability>();
+
+    private List<Ability> playerAbilityChain = new List<Ability>();
+
     public string combatLogMessage = "";
 
 
@@ -53,8 +59,8 @@ public class GameManager : MonoBehaviour
         }
 
         // 4. Subscribe to the events
-        if (playerRoller != null) playerRoller.OnAbilityRolled += OnPlayerAbilityRolled;
-        if (enemyRoller != null) enemyRoller.OnAbilityRolled += OnEnemyAbilityRolled;
+        if (playerRoller != null) playerRoller.OnAbilitiesRolled += OnPlayerAbilitiesRolled;
+        if (enemyRoller != null) enemyRoller.OnAbilitiesRolled += OnEnemyAbilitiesRolled;
         
         // Final sanity check
         if (playerRoller == null || enemyRoller == null || player == null || enemy == null)
@@ -63,11 +69,12 @@ public class GameManager : MonoBehaviour
         }
     }
     
-
-    // Update is called once per frame
-    void Update()
+    public void StartGame()
     {
-
+        currentState = GameState.SlotPhase;
+        // The GameManager is now responsible for enabling/disabling the main UI vs Start/Pause/Game Over screens
+        // UIController.Instance.ShowGameUI(); // Example of UI control
+        StartTurn();
     }
 
     public void StartTurn()
@@ -78,26 +85,28 @@ public class GameManager : MonoBehaviour
         if (CheckGameOver()) return;
 
         if (playerRoller != null){
-            playerRoller.RollAbility();
+            playerRoller.RollAbilities(); 
         }
         if (enemyRoller != null){
-            enemyRoller.RollAbility();
+            enemyRoller.RollAbilities(); 
         }
 
         currentState = GameState.PlayerSlotDecision;
     }
 
-    private void OnPlayerAbilityRolled(Ability rolledAbility)
+    private void OnPlayerAbilitiesRolled(List<Ability> rolledAbilities)
     {
-        playerRolledAbility = rolledAbility;
-        combatLogMessage = $"You rolled the ability: {rolledAbility.abilityName}. Choose a slot or discard.";
+        playerRolledAbilities = rolledAbilities;
+        // Inform the player of their choices
+        string abilityNames = string.Join(", ", rolledAbilities.Select(a => a.abilityName));
+        combatLogMessage = $"You rolled the abilities: {abilityNames}. Choose a slot for each, or discard them.";
         currentState = GameState.PlayerSlotDecision;
     }
 
-    private void OnEnemyAbilityRolled(Ability rolledAbility)
+    private void OnEnemyAbilitiesRolled(List<Ability> rolledAbilities)
     {
-        enemyRolledAbility = rolledAbility;
-        combatLogMessage += $"\nEnemy Rolled: {rolledAbility.abilityName}.";
+        enemyRolledAbilities = rolledAbilities;
+        combatLogMessage += $"\nEnemy Rolled: {enemyRolledAbilities.First().abilityName} and 2 others.";
     }
 
     public void EndSlotPhase()
@@ -105,35 +114,64 @@ public class GameManager : MonoBehaviour
          if (currentState != GameState.PlayerSlotDecision) {
             return;
          }
+        playerRolledAbilities.Clear();
+        currentState = GameState.PlayerAbilitySelect;
         combatLogMessage = "Slot Phase complete. Select an ability from your 5 slots to use.";
         Debug.Log("Slot Phase complete. Moving on to Player Ability Selection Phase");
     }
 
-    public void NextPhase()
+    public void StartCombatSequence(List<Ability> chain)
     {
-        switch (currentState)
+        if (currentState != GameState.PlayerAbilitySelect) return;
+
+        playerAbilityChain = chain;
+        currentState = GameState.CombatSequence;
+        
+        // Start the sequential execution coroutine
+        StartCoroutine(ExecuteTurnSequence());
+    }
+
+    private IEnumerator ExecuteTurnSequence()
+    {
+        if (playerAbilityChain.Count > 0)
         {
-            case GameState.PlayerAbilitySelect:
-                 if (enemyRolledAbility != null)
-                {
-                    combatLogMessage += $"\nEnemy uses: {enemyRolledAbility.abilityName}!";
-                    // Enemy targets the player and passes the GameManager to log/control flow
-                    enemyRolledAbility.Execute(enemy.gameObject, player.gameObject, this);
-                }
-                else
-                {
-                    combatLogMessage += "\nEnemy could not act (no rolled ability).";
-                    // Immediately transition to the next turn if the enemy can't act
-                    StartCoroutine(WaitAndStartTurn(1.5f)); 
-                }
-                break;
-            case GameState.EnemyAction:
-                StartCoroutine(WaitAndStartTurn(1.5f));
-                break;
-            default:
-                Debug.LogWarning("Tried to advance phase from an invalid state: " + currentState);
-                break;
+            combatLogMessage = "Player turn: Executing ability chain...";
+            foreach (Ability ability in playerAbilityChain)
+            {
+                if (CheckGameOver()) yield break;
+                
+                combatLogMessage += $"\nPlayer uses: {ability.abilityName}!";
+                // Execute the ability and WAIT for it to finish.
+                yield return StartCoroutine(ability.Execute(player.gameObject, enemy.gameObject, this));
+            }
+            playerAbilityChain.Clear();
         }
+        else
+        {
+             combatLogMessage += "\nPlayer passed their turn.";
+             yield return new WaitForSeconds(1f);
+        }
+        
+        // 2. --- Enemy's Ability Chain (all 3 rolls) ---
+        if (enemyRolledAbilities.Count > 0)
+        {
+            combatLogMessage += "\n\nEnemy turn: Executing all rolled abilities...";
+            foreach (Ability ability in enemyRolledAbilities)
+            {
+                if (CheckGameOver()) yield break;
+                
+                combatLogMessage += $"\nEnemy uses: {ability.abilityName}!";
+                // Execute the ability and WAIT for it to finish.
+                yield return StartCoroutine(ability.Execute(enemy.gameObject, player.gameObject, this));
+            }
+            enemyRolledAbilities.Clear(); // Enemy rolls are always consumed
+        }
+        else
+        {
+            combatLogMessage += "\nEnemy had no abilities to use.";
+            yield return new WaitForSeconds(1f);
+        }
+        StartCoroutine(WaitAndStartTurn(1.5f));
     }
 
     private IEnumerator WaitAndStartTurn(float delay)

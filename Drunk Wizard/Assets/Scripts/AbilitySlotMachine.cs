@@ -5,9 +5,12 @@ public class AbilitySlotMachine : MonoBehaviour
 {
     public List<Ability> availableAbilities;
 
-    // This event notifies the GameManager and UI when a roll is complete.
-    public delegate void AbilityRolledHandler(Ability rolledAbility);
-    public event AbilityRolledHandler OnAbilityRolled;
+    // Modified event to broadcast a list of rolled abilities
+    public delegate void AbilitiesRolledHandler(List<Ability> rolledAbilities);
+    public event AbilitiesRolledHandler OnAbilitiesRolled; // Changed event name and signature
+
+    // Constant for how many abilities to roll
+    private const int RollsPerTurn = 3;
 
     void Start()
     {
@@ -17,25 +20,31 @@ public class AbilitySlotMachine : MonoBehaviour
         }
     }
 
-    // Simple randomization to simulate the slot machine roll.
-    public void RollAbility()
+    // Now rolls the specified number of abilities.
+    public void RollAbilities()
     {
         if (availableAbilities.Count == 0)
         {
             Debug.LogError("Slot Machine has no abilities to roll!");
+            return;
         }
 
-        // Simulate rolling by picking a random ability
-        int randomIndex = Random.Range(0, availableAbilities.Count);
-        Ability rolledAbility = availableAbilities[randomIndex];
+        List<Ability> rolledAbilities = new List<Ability>();
 
-        Debug.Log($"Slot Machine rolled: {rolledAbility.abilityName}");
-
-        // Broadcast the result
-        if (OnAbilityRolled != null)
+        for (int i = 0; i < RollsPerTurn; i++)
         {
-            OnAbilityRolled(rolledAbility);
+            // Simulate rolling by picking a random ability
+            int randomIndex = Random.Range(0, availableAbilities.Count);
+            Ability rolledAbility = availableAbilities[randomIndex];
+            rolledAbilities.Add(rolledAbility);
+
+            Debug.Log($"Reel {i + 1} rolled: {rolledAbility.abilityName}");
         }
 
+        // Broadcast the result (using the modified event)
+        if (OnAbilitiesRolled != null)
+        {
+            OnAbilitiesRolled(rolledAbilities);
+        }
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private HealthComponent health;
     private GameManager gameManager;
     private EnemyAI targetEnemy; // The enemy target
+
+    private List<Ability> selectedAbilityChain = new List<Ability>();
 
     void Awake()
     {
@@ -38,9 +41,6 @@ public class PlayerController : MonoBehaviour
             }
             abilitySlots[slotIndex] = rolledAbility;
             Debug.Log($"Saved new ability '{rolledAbility.abilityName}' to slot {slotIndex + 1}.");
-            
-            // Crucial: After saving, notify the GameManager to proceed to the next phase.
-            gameManager.EndSlotPhase(); 
         }
         else
         {
@@ -48,34 +48,50 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Public method called by the 'Discard' UI button.
-    public void DiscardRolledAbility()
+    public void FinalizeSlotDecision()
     {
-        Debug.Log("Player discarded the rolled ability.");
-        gameManager.EndSlotPhase();
+        gameManager.EndSlotPhase(); 
     }
-    
-    // Public method called by a UI button during the Player Ability Select phase.
-    public void UseAbility(int slotIndex)
+
+    public void SelectAbilityForChain(int slotIndex)
     {
-        if (slotIndex >= 0 && slotIndex < maxAbilitySlots && abilitySlots[slotIndex] != null)
+        if (gameManager.CurrentState != GameManager.GameState.PlayerAbilitySelect) return;
+        
+        Ability abilityToSelect = abilitySlots[slotIndex];
+
+        if (abilityToSelect != null)
         {
-            Ability abilityToUse = abilitySlots[slotIndex];
-            
-            // 1. Execute the ability
-            abilityToUse.Execute(this.gameObject, targetEnemy.gameObject, gameManager);
+            selectedAbilityChain.Add(abilityToSelect);
+            Debug.Log($"Added '{abilityToSelect.abilityName}' to the chain. Chain Length: {selectedAbilityChain.Count}");
+            gameManager.combatLogMessage = $"Chain: {string.Join(", ", selectedAbilityChain.Select(a => a.abilityName))}";
 
-            // 2. Clear the used slot
-            abilitySlots[slotIndex] = null;
-            Debug.Log($"Used and cleared slot {slotIndex + 1}.");
-
-            // 3. Notify the GameManager to advance to the Enemy Action Phase
-            gameManager.NextPhase();
+            // The ability is consumed upon execution, so we clear the slot now.
+            // This prevents using the same ability twice in one turn.
+            abilitySlots[slotIndex] = null; 
         }
         else
         {
-            Debug.LogWarning($"Cannot use ability: Slot {slotIndex + 1} is empty or invalid.");
+            Debug.LogWarning($"Slot {slotIndex + 1} is empty. Cannot select.");
         }
+    }
+    
+    public void ConfirmAbilityChain()
+    {
+        if (gameManager.CurrentState != GameManager.GameState.PlayerAbilitySelect) return;
+
+        if (selectedAbilityChain.Count > 0)
+        {
+            // Pass the chain to the GameManager and begin combat sequence
+            gameManager.StartCombatSequence(selectedAbilityChain);
+        }
+        else
+        {
+            // If the player selects nothing, they pass the turn.
+            gameManager.StartCombatSequence(new List<Ability>()); 
+        }
+
+        // The chain list is cleared by the GameManager after execution.
+        selectedAbilityChain.Clear(); 
     }
     
     // Utility function to check if a slot is empty (useful for UI)

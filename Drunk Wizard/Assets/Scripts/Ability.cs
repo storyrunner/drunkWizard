@@ -9,6 +9,10 @@ public class Ability : ScriptableObject
 
     [Header("Basic Info")]
     public string abilityName = "New Ability";
+    
+    [Header("Visuals")]
+    public Sprite abilityIcon; // For 2D games (UI or SpriteRenderer)
+
     [TextArea(3, 5)]
     public string description = "A basic ability.";
     public AbilityType type = AbilityType.Attack;

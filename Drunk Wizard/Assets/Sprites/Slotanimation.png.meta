@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: c41904ec06d372d42b9841631fab5d92
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6421013618347436529
+    second: Slotanimation_0
+  - first:
+      213: 8885426291824347052
+    second: Slotanimation_1
+  - first:
+      213: 5106494339691681275
+    second: Slotanimation_2
+  - first:
+      213: 7443780080546463467
+    second: Slotanimation_3
+  - first:
+      213: 4665835270762631782
+    second: Slotanimation_4
+  - first:
+      213: -4461590000770996183
+    second: Slotanimation_5
+  - first:
+      213: 1437456373426640549
+    second: Slotanimation_6
+  - first:
+      213: -3919178517899960362
+    second: Slotanimation_7
+  - first:
+      213: 6368930537403359712
+    second: Slotanimation_8
+  - first:
+      213: 3358115152470065137
+    second: Slotanimation_9
+  - first:
+      213: -688023537022353261
+    second: Slotanimation_10
+  - first:
+      213: 2352033350467181005
+    second: Slotanimation_11
+  - first:
+      213: 351494590871374175
+    second: Slotanimation_12
+  - first:
+      213: -2540962747194014178
+    second: Slotanimation_13
+  - first:
+      213: -240653102495475079
+    second: Slotanimation_14
+  - first:
+      213: 747351276630684490
+    second: Slotanimation_15
+  - first:
+      213: 6969554029175125873
+    second: Slotanimation_16
+  - first:
+      213: -3217409955498340779
+    second: Slotanimation_17
+  - first:
+      213: 6764657970819810526
+    second: Slotanimation_18
+  - first:
+      213: 4881077156033946373
+    second: Slotanimation_19
+  - first:
+      213: -8700197230813618945
+    second: Slotanimation_20
+  - first:
+      213: -691516408352706696
+    second: Slotanimation_21
+  - first:
+      213: 7505201471758784185
+    second: Slotanimation_22
+  - first:
+      213: 4988032250824036425
+    second: Slotanimation_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Slotanimation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 168
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f96b8badd50c1950800000000000000
+      internalID: 6421013618347436529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_1
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca74b1aa2206f4b70800000000000000
+      internalID: 8885426291824347052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_2
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf59ddceb89edd640800000000000000
+      internalID: 5106494339691681275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_3
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beeb91f5b8e9d4760800000000000000
+      internalID: 7443780080546463467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_4
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6629b46457060c040800000000000000
+      internalID: 4665835270762631782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_5
+      rect:
+        serializedVersion: 2
+        x: 879
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9282c96688f3512c0800000000000000
+      internalID: -4461590000770996183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_6
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a65736a4fed2f310800000000000000
+      internalID: 1437456373426640549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_7
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6df1b3517e74c99c0800000000000000
+      internalID: -3919178517899960362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_8
+      rect:
+        serializedVersion: 2
+        x: 1407
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e1a019649cf26850800000000000000
+      internalID: 6368930537403359712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_9
+      rect:
+        serializedVersion: 2
+        x: 1583
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ffb5d960fb6a9e20800000000000000
+      internalID: 3358115152470065137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_10
+      rect:
+        serializedVersion: 2
+        x: 1759
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 390cca60d36a376f0800000000000000
+      internalID: -688023537022353261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_11
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc9d772eed914a020800000000000000
+      internalID: 2352033350467181005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_12
+      rect:
+        serializedVersion: 2
+        x: 2111
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f590c55d772c0e400800000000000000
+      internalID: 351494590871374175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_13
+      rect:
+        serializedVersion: 2
+        x: 2287
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e16000218dfacbcd0800000000000000
+      internalID: -2540962747194014178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_14
+      rect:
+        serializedVersion: 2
+        x: 2463
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97a59af374709acf0800000000000000
+      internalID: -240653102495475079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_15
+      rect:
+        serializedVersion: 2
+        x: 2639
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a43b106c6002f5a00800000000000000
+      internalID: 747351276630684490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_16
+      rect:
+        serializedVersion: 2
+        x: 2815
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17730e79674d8b060800000000000000
+      internalID: 6969554029175125873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_17
+      rect:
+        serializedVersion: 2
+        x: 2991
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55e47b921b67953d0800000000000000
+      internalID: -3217409955498340779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_18
+      rect:
+        serializedVersion: 2
+        x: 3167
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed4cab17594e0ed50800000000000000
+      internalID: 6764657970819810526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_19
+      rect:
+        serializedVersion: 2
+        x: 3343
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5036da6ffc11db340800000000000000
+      internalID: 4881077156033946373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_20
+      rect:
+        serializedVersion: 2
+        x: 3519
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffc5485d6b0b24780800000000000000
+      internalID: -8700197230813618945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_21
+      rect:
+        serializedVersion: 2
+        x: 3695
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87f68cb8d7d3766f0800000000000000
+      internalID: -691516408352706696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_22
+      rect:
+        serializedVersion: 2
+        x: 3871
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b6dbeb69f4d72860800000000000000
+      internalID: 7505201471758784185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slotanimation_23
+      rect:
+        serializedVersion: 2
+        x: 4047
+        y: 0
+        width: 169
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9401f8687ec093540800000000000000
+      internalID: 4988032250824036425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Slotanimation_0: 6421013618347436529
+      Slotanimation_1: 8885426291824347052
+      Slotanimation_10: -688023537022353261
+      Slotanimation_11: 2352033350467181005
+      Slotanimation_12: 351494590871374175
+      Slotanimation_13: -2540962747194014178
+      Slotanimation_14: -240653102495475079
+      Slotanimation_15: 747351276630684490
+      Slotanimation_16: 6969554029175125873
+      Slotanimation_17: -3217409955498340779
+      Slotanimation_18: 6764657970819810526
+      Slotanimation_19: 4881077156033946373
+      Slotanimation_2: 5106494339691681275
+      Slotanimation_20: -8700197230813618945
+      Slotanimation_21: -691516408352706696
+      Slotanimation_22: 7505201471758784185
+      Slotanimation_23: 4988032250824036425
+      Slotanimation_3: 7443780080546463467
+      Slotanimation_4: 4665835270762631782
+      Slotanimation_5: -4461590000770996183
+      Slotanimation_6: 1437456373426640549
+      Slotanimation_7: -3919178517899960362
+      Slotanimation_8: 6368930537403359712
+      Slotanimation_9: 3358115152470065137
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

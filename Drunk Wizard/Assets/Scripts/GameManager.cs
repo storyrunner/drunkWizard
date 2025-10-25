@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        playerRoller.RollAbilities();
+
         // 1. Find Player and Enemy characters (always safe using FindFirstObjectByType)
         player = FindFirstObjectByType<PlayerController>();
         enemy = FindFirstObjectByType<EnemyAI>();

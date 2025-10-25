@@ -31,6 +31,21 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
+        // Handle Pause Input
+        if (Input.GetKeyDown(KeyCode.Escape))
+    {
+        // Only allow pausing if the game is active (not on the initial Start screen 
+        // and not already Game Over).
+        if (gameManager.CurrentState != GameManager.GameState.AwaitStart && 
+            gameManager.CurrentState != GameManager.GameState.GameOver)
+        {
+            TogglePause();
+        }
+    }
+    if (pauseScreenPanel.activeSelf)
+    {
+        return; // <--- THIS LINE IS ABSOLUTELY ESSENTIAL!
+    }
         // Control visibility based on GameState
         // Note: Slot and Ability panels are controlled within their respective scripts for granularity.
         switch (gameManager.CurrentState)
@@ -41,17 +56,19 @@ public class UIController : MonoBehaviour
             case GameManager.GameState.GameOver:
                 ShowGameOverScreen();
                 break;
+            case GameManager.GameState.PlayerSlotDecision:
+                ShowSlotDecisionUI(); 
+                break;
+            case GameManager.GameState.PlayerAbilitySelect:
+                ShowAbilitySelectionUI();
+                break;
             default:
                 // Ensure Game UI is visible during active play states
-                if (!inGameHUDPanel.activeSelf) ShowGameUI();
+                ShowGameUI();
                 break;
         }
 
-        // Handle Pause Input
-        if (Input.GetKeyDown(KeyCode.Escape) && gameManager.CurrentState != GameManager.GameState.GameOver)
-        {
-            TogglePause();
-        }
+        
     }
 
     // --- Public Screen Control Methods (Called by UI Buttons) ---
@@ -96,8 +113,11 @@ public class UIController : MonoBehaviour
     public void RestartGame()
     {
         // Reload the current scene
+        if (gameManager != null)
+    {
+        gameManager.InitializeGame(); 
+    }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1;
     }
 
     public void QuitGame()
@@ -106,5 +126,29 @@ public class UIController : MonoBehaviour
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
+    }
+
+        public void ShowSlotDecisionUI()
+    {
+    // 1. Ensure the main game HUD is visible (hides Start/Pause/Game Over screens)
+    ShowGameUI(); 
+
+    // 2. Activate the Slot Decision Panel
+    slotDecisionPanel.SetActive(true); 
+
+    // 3. Deactivate any other phase-specific panels
+    abilitySelectionPanel.SetActive(false); 
+    }   
+
+    public void ShowAbilitySelectionUI()
+    {
+    // 1. Ensure the main game HUD is visible
+    ShowGameUI(); 
+
+    // 2. Activate the Ability Selection Panel
+    abilitySelectionPanel.SetActive(true);
+
+    // 3. Deactivate the Slot Decision Panel
+    slotDecisionPanel.SetActive(false);
     }
 }

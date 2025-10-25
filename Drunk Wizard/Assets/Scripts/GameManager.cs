@@ -199,4 +199,31 @@ public class GameManager : MonoBehaviour
         }
         return false;
     }
+
+    public void InitializeGame()
+{
+    // 1. Reset the Game State to the beginning
+    currentState = GameState.AwaitStart;
+    combatLogMessage = "Welcome! Press START or ENTER to begin!";
+
+    // 2. Explicitly reset Player and Enemy Health
+    // (This is the critical step that prevents the immediate GameOver state)
+    if (player != null && player.Health != null)
+    {
+        player.Health.ResetHealth();
+        // Optional: Re-enable character sprites if they were disabled on death
+        if (player.gameObject.TryGetComponent(out SpriteRenderer playerR)) playerR.enabled = true;
+    }
+    if (enemy != null && enemy.Health != null)
+    {
+        enemy.Health.ResetHealth();
+        if (enemy.gameObject.TryGetComponent(out SpriteRenderer enemyR)) enemyR.enabled = true;
+    }
+    
+    // 3. Clear ability lists for a fresh start
+    playerRolledAbilities.Clear();
+    enemyRolledAbilities.Clear();
+    
+    // Note: The UIController will handle showing the StartScreen next.
+}
 }

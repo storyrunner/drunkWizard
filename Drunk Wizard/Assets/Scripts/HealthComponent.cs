@@ -62,4 +62,16 @@ public class HealthComponent : MonoBehaviour
         currentHealth = Mathf.Min(maxHealth, currentHealth + healAmount);
         Debug.Log($"{gameObject.name} healed for {healAmount}. Current Health: {currentHealth}");
     }
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        // Ensure the character is visible upon reset
+        if (characterRenderer != null)
+        {
+            characterRenderer.enabled = true;
+            characterRenderer.color = originalColor; // Also reset the color
+        }
+        Debug.Log($"{gameObject.name} health reset to {maxHealth}.");
+    }
 }

@@ -11,62 +11,125 @@ public class PlayerController : MonoBehaviour
     private Ability[] abilitySlots;
     private HealthComponent health;
     private GameManager gameManager;
-    private EnemyAI targetEnemy; // The enemy target
+    private EnemyAI targetEnemy; 
 
     private List<Ability> selectedAbilityChain = new List<Ability>();
+
+    // =========================================================
+    // NEW FIELDS FOR "SELECT AND SWAP" MECHANIC
+    // =========================================================
+    private Ability abilityToSwap = null;
+    private int rolledIndexToConsume = -1; 
+    // =========================================================
+
 
     void Awake()
     {
         abilitySlots = new Ability[maxAbilitySlots];
         health = GetComponent<HealthComponent>();
         
-        // Find necessary components
         gameManager = FindFirstObjectByType<GameManager>();
-        targetEnemy = FindFirstObjectByType<EnemyAI>(); // Simple targeting for now
+        targetEnemy = FindFirstObjectByType<EnemyAI>();
     }
 
     public HealthComponent Health => health;
 
     // --- Slot Management (The core Player mechanic) ---
 
-    // Public method called by a UI button after the slot machine roll.
-    // Index is 0-4, corresponding to which slot the player chooses to overwrite.
-    public void SaveRolledAbility(Ability rolledAbility, int slotIndex)
+    // NEW: PUBLIC GETTER to fix the CS0122 error
+    public Ability GetAbilityToSwap()
     {
-        if (slotIndex >= 0 && slotIndex < maxAbilitySlots)
+        return abilityToSwap;
+    }
+
+    // =========================================================
+    // SETTER METHOD (Called by RolledAbilityUI when the roll is clicked)
+    // =========================================================
+    public void SetAbilityToSwap(Ability rolledAbility, int rolledIndex)
+    {
+        if (abilityToSwap == rolledAbility)
         {
-            if (abilitySlots[slotIndex] != null)
-            {
-                Debug.Log($"Replaced old ability '{abilitySlots[slotIndex].abilityName}' in slot {slotIndex + 1}.");
-            }
-            abilitySlots[slotIndex] = rolledAbility;
-            Debug.Log($"Saved new ability '{rolledAbility.abilityName}' to slot {slotIndex + 1}.");
+            abilityToSwap = null;
+            rolledIndexToConsume = -1;
+            Debug.Log($"Ability un-selected: {rolledAbility.abilityName}");
         }
         else
         {
-            Debug.LogError("Invalid slot index chosen.");
+            abilityToSwap = rolledAbility;
+            rolledIndexToConsume = rolledIndex;
+            Debug.Log($"Ability to swap set: {rolledAbility.abilityName} from rolled index {rolledIndex}");
         }
     }
 
-    public void FinalizeSlotDecision()
+    // GETTER METHOD (Used by PlayerSlotUI to enable its buttons)
+    public bool IsAbilityToSwapSet()
     {
-        gameManager.EndSlotPhase(); 
+        return abilityToSwap != null;
     }
 
+    // FINALIZER METHOD (Called by PlayerSlotUI when the permanent slot is clicked)
+    public void FinalizeRolledSwap(int destinationSlotIndex)
+    {
+        if (abilityToSwap == null || rolledIndexToConsume == -1) 
+        {
+            Debug.LogError("Attempted to finalize swap without an ability selected!");
+            return;
+        }
+
+        // 1. Perform the save (overwrite the permanent slot)
+        if (destinationSlotIndex >= 0 && destinationSlotIndex < maxAbilitySlots)
+        {
+            if (abilitySlots[destinationSlotIndex] != null)
+            {
+                Debug.Log($"Replaced old ability '{abilitySlots[destinationSlotIndex].abilityName}' in slot {destinationSlotIndex + 1}.");
+            }
+            abilitySlots[destinationSlotIndex] = abilityToSwap;
+        }
+
+        // 2. Consume the ability from the rolled list
+        if (gameManager.playerRolledAbilities.Count > rolledIndexToConsume)
+        {
+            gameManager.playerRolledAbilities.RemoveAt(rolledIndexToConsume);
+        }
+
+        // 3. Clear the temporary swap state
+        Debug.Log($"Swap completed. Remaining rolls: {gameManager.playerRolledAbilities.Count}");
+        abilityToSwap = null;
+        rolledIndexToConsume = -1;
+
+        if (gameManager.playerRolledAbilities.Count == 0)
+    {
+        Debug.Log("All rolled abilities consumed. Advancing phase.");
+        
+        // This method should call gameManager.SetGameState(GameManager.GameState.PlayerAbilitySelect)
+        FinalizeSlotDecision(); 
+    }
+    }
+    // =========================================================
+    
+    // METHOD MODIFIED TO USE SetGameState() to fix CS0200
+    public void FinalizeSlotDecision()
+    {
+        abilityToSwap = null;
+        rolledIndexToConsume = -1;
+        
+        // FIX: Use the new public setter method on GameManager
+        gameManager.SetGameState(GameManager.GameState.PlayerAbilitySelect);
+        gameManager.combatLogMessage += "\nSlot decision finalized. Choose your attack chain.";
+    }
+
+    // --- Ability Chain Logic (Unchanged) ---
+    
     public void SelectAbilityForChain(int slotIndex)
     {
         if (gameManager.CurrentState != GameManager.GameState.PlayerAbilitySelect) return;
         
-        Ability abilityToSelect = abilitySlots[slotIndex];
-
-        if (abilityToSelect != null)
+        if (abilitySlots[slotIndex] != null)
         {
-            selectedAbilityChain.Add(abilityToSelect);
-            Debug.Log($"Added '{abilityToSelect.abilityName}' to the chain. Chain Length: {selectedAbilityChain.Count}");
-            gameManager.combatLogMessage = $"Chain: {string.Join(", ", selectedAbilityChain.Select(a => a.abilityName))}";
+            Ability selectedAbility = abilitySlots[slotIndex];
+            selectedAbilityChain.Add(selectedAbility);
+            gameManager.combatLogMessage += $"\nChain: {string.Join(", ", selectedAbilityChain.Select(a => a.abilityName))}";
 
-            // The ability is consumed upon execution, so we clear the slot now.
-            // This prevents using the same ability twice in one turn.
             abilitySlots[slotIndex] = null; 
         }
         else
@@ -81,32 +144,28 @@ public class PlayerController : MonoBehaviour
 
         if (selectedAbilityChain.Count > 0)
         {
-            // Pass the chain to the GameManager and begin combat sequence
             gameManager.StartCombatSequence(selectedAbilityChain);
         }
         else
         {
-            // If the player selects nothing, they pass the turn.
             gameManager.StartCombatSequence(new List<Ability>()); 
         }
 
-        // The chain list is cleared by the GameManager after execution.
         selectedAbilityChain.Clear(); 
     }
     
-    // Utility function to check if a slot is empty (useful for UI)
     public bool IsSlotEmpty(int index)
     {
         return abilitySlots[index] == null;
     }
 
-    // Returns the current ability in a slot (useful for UI display)
     public Ability GetAbilityInSlot(int index)
     {
         return abilitySlots[index];
     }
 
-    public List<Ability> GetSelectedAbilityChain(){
+    public List<Ability> GetSelectedAbilityChain()
+    {
         return selectedAbilityChain;
     }
 }

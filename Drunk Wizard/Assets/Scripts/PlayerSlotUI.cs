@@ -10,6 +10,7 @@ public class PlayerSlotUI : MonoBehaviour
 
     [Header("References")]
     public TextMeshProUGUI abilityNameText;
+    // The single button that handles both selection and saving
     public Button selectButton; 
     public Image backgroundImage; 
     public Image abilityIconImage;
@@ -29,24 +30,58 @@ public class PlayerSlotUI : MonoBehaviour
             return;
         }
         
-        // Add listener for the main Select button
-        // This is the new chain selection action
-        selectButton.onClick.AddListener(() => playerController.SelectAbilityForChain(slotIndex));
+        // Listener calls the dual-purpose handler
+        selectButton.onClick.RemoveAllListeners();
+        selectButton.onClick.AddListener(OnDestinationSlotClicked);
     }
 
     void Update()
     {
         UpdateSlotDisplay();
         
-        // Only enable selection button during the PlayerAbilitySelect phase
+        bool isDecisionPhase = gameManager.CurrentState == GameManager.GameState.PlayerSlotDecision;
         bool isSelectPhase = gameManager.CurrentState == GameManager.GameState.PlayerAbilitySelect;
         bool isSlotNotEmpty = !playerController.IsSlotEmpty(slotIndex);
         
-        selectButton.interactable = isSelectPhase && isSlotNotEmpty;
+        // Check if PlayerController is holding a rolled ability for a swap
+        bool isHoldingSwap = playerController.IsAbilityToSwapSet();
+
+        // The button is interactable IF:
+        // 1. (Select Phase AND Slot has an ability) -OR-
+        // 2. (Decision Phase AND Player is holding a roll to swap)
+        selectButton.interactable = (isSelectPhase && isSlotNotEmpty) || (isDecisionPhase && isHoldingSwap);
         
-        // Optional visual feedback
-        backgroundImage.color = selectButton.interactable ? Color.white : Color.grey;
-        UpdateSlotDisplay();
+        // --- Visual Feedback ---
+        if (isDecisionPhase && isHoldingSwap)
+        {
+            // Highlight this slot to show it's a valid swap destination
+            backgroundImage.color = Color.yellow; 
+        }
+        else if (isSelectPhase && isSlotNotEmpty)
+        {
+            // Standard selection color when building the chain
+            backgroundImage.color = Color.white; 
+        }
+        else
+        {
+            // Default color for inactive/empty slot
+            backgroundImage.color = Color.grey; 
+        }
+    }
+
+    // Dual-purpose click handler
+    private void OnDestinationSlotClicked()
+    {
+        // 1. SWAP LOGIC: Executed if the player is holding a roll AND it's the decision phase
+        if (playerController.IsAbilityToSwapSet() && gameManager.CurrentState == GameManager.GameState.PlayerSlotDecision)
+        {
+            playerController.FinalizeRolledSwap(slotIndex);
+        }
+        // 2. SELECTION LOGIC: Executed if it's the ability selection phase
+        else if (gameManager.CurrentState == GameManager.GameState.PlayerAbilitySelect)
+        {
+            playerController.SelectAbilityForChain(slotIndex);
+        }
     }
 
     public void UpdateSlotDisplay()
@@ -63,12 +98,5 @@ public class PlayerSlotUI : MonoBehaviour
             abilityNameText.text = $"Slot {slotIndex + 1}: EMPTY";
             abilityIconImage.enabled = false;
         }
-    }
-
-    private void OnSelectAbilityClicked()
-    {
-        // --- [Rest of the OnSelectAbilityClicked logic] ---
-        // This method simply calls the logic in PlayerController
-        playerController.SelectAbilityForChain(slotIndex);
     }
 }

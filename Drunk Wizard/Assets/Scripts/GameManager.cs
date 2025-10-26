@@ -226,4 +226,25 @@ public class GameManager : MonoBehaviour
     
     // Note: The UIController will handle showing the StartScreen next.
 }
+
+// --- Add this to your GameManager.cs ---
+
+public void SetGameState(GameState newState)
+{
+    // Assuming you have a private field: private GameState currentState;
+    currentState = newState;
+    Debug.Log($"Game State changed to: {newState}");
+}
+
+// --- In GameManager.cs (somewhere in your game loop or state handler) ---
+
+void CheckRolledAbilitiesStatus()
+{
+    if (CurrentState == GameState.PlayerSlotDecision && playerRolledAbilities.Count == 0)
+    {
+        // All rolls have been saved or discarded. Move to the next phase.
+        SetGameState(GameState.PlayerAbilitySelect);
+        combatLogMessage += "\nAll rolls saved! Choose your attack chain.";
+    }
+}
 }

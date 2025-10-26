@@ -13,12 +13,11 @@ public class RolledAbilityUI : MonoBehaviour
     [Header("References")]
     public GameObject rolledPanel; 
     public TextMeshProUGUI abilityNameText;
-
     public Image abilityIconImage;
 
-    [Header("Swap Buttons")]
-    // The 5 buttons for the player to swap the rolled ability into a permanent slot
-    public Button[] swapIntoSlotButtons = new Button[5]; 
+    [Header("Select Button")]
+    // The single button the player clicks to initiate the swap
+    public Button selectRollButton; 
     
     private GameManager gameManager;
     private PlayerController playerController;
@@ -28,13 +27,12 @@ public class RolledAbilityUI : MonoBehaviour
         gameManager = FindFirstObjectByType<GameManager>();
         playerController = FindFirstObjectByType<PlayerController>();
         
-        // Set up the listeners for the 5 swap buttons
-        for (int i = 0; i < swapIntoSlotButtons.Length; i++)
+        if (selectRollButton != null)
         {
-            int slotIndex = i;
-            swapIntoSlotButtons[i].onClick.AddListener(() => OnSwapToSlotClicked(slotIndex));
+            // Listener for the new single button
+            selectRollButton.onClick.AddListener(OnRolledAbilitySelected);
         }
-
+        
         rolledPanel.SetActive(false); 
     }
 
@@ -43,17 +41,15 @@ public class RolledAbilityUI : MonoBehaviour
         // 1. Check if the player is in the decision phase
         bool isDecisionPhase = gameManager.CurrentState == GameManager.GameState.PlayerSlotDecision;
 
-        // 2. Check if this specific rolled ability is still available in the list
-        // Note: The list shifts when an ability is saved, so we check against the list's *current* contents.
-        bool isAbilityAvailable = isDecisionPhase && gameManager.playerRolledAbilities.Count > rolledAbilityIndex;
+        // 2. Check if an ability is available at this UI's assigned index (0, 1, or 2)
+        bool isAbilityAvailable = gameManager.playerRolledAbilities.Count > rolledAbilityIndex; 
 
         // 3. Update Display
-        if (isAbilityAvailable)
+        if (isDecisionPhase && isAbilityAvailable)
         {
             Ability currentRolledAbility = gameManager.playerRolledAbilities[rolledAbilityIndex];
             abilityNameText.text = currentRolledAbility.abilityName;
             
-            // NEW: Set the icon and make the image visible
             abilityIconImage.sprite = currentRolledAbility.abilityIcon;
             abilityIconImage.enabled = true;
             
@@ -62,31 +58,49 @@ public class RolledAbilityUI : MonoBehaviour
         else
         {
             rolledPanel.SetActive(false);
-            // NEW: Ensure the image is disabled when not active
             abilityIconImage.enabled = false; 
         }
 
         // 4. Update Button Interactivity
-        foreach (var btn in swapIntoSlotButtons)
+        
+        bool isCurrentlySelected = false;
+        if (isAbilityAvailable && playerController.IsAbilityToSwapSet())
         {
-            btn.interactable = isDecisionPhase && isAbilityAvailable;
+            // Use the public getter (assuming you added GetAbilityToSwap() to PlayerController)
+            if (playerController.GetAbilityToSwap() == gameManager.playerRolledAbilities[rolledAbilityIndex])
+            {
+                isCurrentlySelected = true;
+            }
+        }
+        
+        // Prevent clicking other rolls if one is already selected (unless this one is currently selected to un-select it)
+        bool isHoldingDifferentSwap = playerController.IsAbilityToSwapSet() && !isCurrentlySelected;
+
+        if (selectRollButton != null)
+        {
+            selectRollButton.interactable = isDecisionPhase && isAbilityAvailable && !isHoldingDifferentSwap;
+            
+            // Optional: Change button color/sprite when selected
+            if (isCurrentlySelected)
+            {
+                selectRollButton.image.color = Color.green;
+            }
+            else
+            {
+                selectRollButton.image.color = Color.white;
+            }
         }
     }
     
-    // Called when one of the 5 "Swap to Slot X" buttons is clicked
-    private void OnSwapToSlotClicked(int slotIndex)
+    // Called when the Rolled Ability's single button is clicked
+    private void OnRolledAbilitySelected()
     {
         if (gameManager.playerRolledAbilities.Count > rolledAbilityIndex)
         {
-            // Get the ability at the rolled index
-            Ability abilityToSave = gameManager.playerRolledAbilities[rolledAbilityIndex];
-
-            // 1. Save the ability to the permanent slot
-            playerController.SaveRolledAbility(abilityToSave, slotIndex);
+            Ability ability = gameManager.playerRolledAbilities[rolledAbilityIndex];
             
-            // 2. Remove the saved ability from the rolled list
-            // This is the crucial step that marks this roll as 'used' and causes the list to shift.
-            gameManager.playerRolledAbilities.RemoveAt(rolledAbilityIndex);
+            // This method handles selecting or un-selecting the roll
+            playerController.SetAbilityToSwap(ability, rolledAbilityIndex);
         }
     }
 }
